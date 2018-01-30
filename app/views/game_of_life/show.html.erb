@@ -1,0 +1,13 @@
+<table border="1" cellspacing="0">
+  <tr colspan="<%=@grid.xaxis_length%>">
+    <%= button_to "Play", action: "show" %>
+  </tr>
+    <%0.upto(@grid.xaxis_length-1).each do |x|%>
+    <tr>
+      <%0.upto(@grid.yaxis_length-1).each do |y|%>
+      <%cell = @grid.cells.detect{|c| (c.x == x and c.y == y)}%>
+      <td align="center" width="30" height="5"><%=print_cell_status(cell.state)%></td>
+      <%end%>
+    </tr>
+    <%end%>
+</table>

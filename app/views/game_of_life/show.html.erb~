@@ -1,0 +1,18 @@
+<table border="1" cellspacing="0">
+  <form method="post" action="/game_of_life/show">
+    <%0.upto(@grid.xaxis_length-1).each do |x|%>
+    <tr>
+      <%0.upto(@grid.yaxis_length-1).each do |y|%>
+      <%cell = @grid.cells.detect{|c| (c.x == x and c.y == y)}%>
+      <%if cell%>
+      <input type=hidden name=cell[<%=x%>] value=<%=cell.live%>>
+      <%else%>
+      <input type=hidden name=cell[<%=x%>] value=nil>
+      <%end%>
+      <td align="center" width="10" height="10"><%=print_cell_status(cell.live)%></td>
+      <%end%>
+    </tr>
+    <%end%>
+    <input type="submit" value="Submit">
+  </form>
+</table>

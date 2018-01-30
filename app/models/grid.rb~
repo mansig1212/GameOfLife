@@ -1,0 +1,39 @@
+class Grid
+  X_AXIS_LENGTH = 50
+  Y_AXIS_LENGTH = 50
+
+  attr_accessor :xaxis_length, :yaxis_length, :cells
+  
+  def initialize
+    @xaxis_length = X_AXIS_LENGTH
+    @yaxis_length = Y_AXIS_LENGTH
+    @cells = []
+  end
+
+  def generate_cells
+    live_cells = rand(15..30)
+    0.upto(xaxis_length-1) do |x|
+      0.upto(yaxis_length-1) do |y|
+        if x.between?(5, 45) and y.between?(5, 45)
+          status = rand(0..1)
+          state = (status == 1 and live_cells > 0) ? true : false
+          cells << Cell.new(x,y,state,self)
+          live_cells -= 1 if status == 1
+        else
+          cells << Cell.new(x,y,false,self)
+        end        
+      end
+    end
+  end
+
+  def next_generation
+    cells.each do |c|
+      live_neighbours = c.live_neighbours      
+      if c.live?
+        c.live = false if live_neighbours.length < 2 and live_neighbours.length > 3
+      elsif c.dead?
+        c.live = true if live_neighbours.length == 3
+      end
+    end
+  end
+end

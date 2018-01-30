@@ -1,0 +1,10 @@
+class GameOfLifeController < ApplicationController
+  def show
+    if request.get?
+      @grid = Grid.new
+      @grid.generate_cells      
+    elsif request.post?
+      
+    end
+  end
+end

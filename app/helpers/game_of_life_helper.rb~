@@ -1,0 +1,9 @@
+module GameOfLifeHelper
+  def print_cell_status(status)
+    if status
+      '*'
+    else
+      '.'
+    end
+  end
+end
